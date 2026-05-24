@@ -179,6 +179,7 @@ exec-once = awww-daemon
 exec-once = sleep 1 && ls ~/Pictures/Wallpapers | shuf -n 1 | xargs -I {} awww img ~/Pictures/Wallpapers/{} --transition-type grow
 exec-once = hyprctl setcursor Adwaita 24
 exec-once = eww daemon && eww open bar
+exec-once = udiskie &
 
 debug {
     disable_logs = true

@@ -193,6 +193,7 @@ Requirements:
 - brightnessctl
 - awk
 - wpctl OR alsa-utils (for audio fallback)
+- udiskie
 
 
 Install hyprland from apt or it's source
