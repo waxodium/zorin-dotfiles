@@ -1,0 +1,48 @@
+general.live_config_reload = true
+
+[window]
+decorations = "None"
+opacity = 0.6
+blur = true
+padding = { x = 12, y = 12 }
+dynamic_title = true
+
+[font]
+size = 14.0
+
+[font.normal]
+family = "FiraCode Nerd Font"
+style = "Regular"
+
+[cursor]
+style = { shape = "Beam", blinking = "On" }
+thickness = 0.15
+
+
+[colors.primary]
+background = "#1a1b26"
+foreground = "#e5989b"
+
+[colors.cursor]
+text = "#1a1b26"
+cursor = "#e5989b"
+
+[colors.normal]
+black   = "#15161e"
+red     = "#e5989b"
+green   = "#b4befe"
+yellow  = "#f9e2af"
+blue    = "#89b4fa"
+magenta = "#cba6f7"
+cyan    = "#94e2d5"
+white   = "#bac2de"
+
+[colors.bright]
+black   = "#45475a"
+red     = "#e5989b"
+green   = "#b4befe"
+yellow  = "#f9e2af"
+blue    = "#89b4fa"
+magenta = "#cba6f7"
+cyan    = "#94e2d5"
+white   = "#a6adc8"

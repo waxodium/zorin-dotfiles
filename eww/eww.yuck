@@ -1,0 +1,104 @@
+(defpoll time        :interval "1s"   "date '+%H:%M'")
+(defpoll seconds     :interval "1s"   "date '+%S'")
+(defpoll active-ws   :interval "0.2s" "hyprctl activeworkspace -j | jq '.id'")
+(defpoll workspaces  :interval "0.5s" "hyprctl workspaces -j | jq '[.[] | {id:.id}] | sort_by(.id)'")
+
+(defpoll volume      :interval "1s"
+  "wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null | awk '{printf \"%d\", $2*100}' || amixer get Master | awk -F'[][]' 'END{ print $2 }' | tr -d '%'")
+(defpoll muted       :interval "1s"
+  "wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null | grep -c MUTED || amixer get Master | grep -c '\[off\]'")
+
+(defpoll bat-cap     :interval "10s"
+  "cat /sys/class/power_supply/BAT*/capacity 2>/dev/null | head -n 1 || echo '?'")
+(defpoll bat-status  :interval "10s"
+  "cat /sys/class/power_supply/BAT*/status 2>/dev/null | head -n 1 || echo 'Unknown'")
+
+
+(defwidget ws-dot [id active-id]
+  (button
+    :class   {id == active-id ? "ws-dot active" : "ws-dot"}
+    :onclick "hyprctl dispatch workspace ${id}"
+    "${id}"))
+
+
+(defwidget bat-glyph []
+  (label
+    :class "bat-icon"
+    :text  {bat-status == "Charging" ? "󰂄" :
+            bat-cap == "?" ? "󰂑" :
+            bat-cap > 80  ? "󰁹" :
+            bat-cap > 60  ? "󰂀" :
+            bat-cap > 40  ? "󰁾" :
+            bat-cap > 20  ? "󰁼" :
+            "󰁺"}))
+
+
+(defwidget bar-left []
+  (box
+    :class        "bar-left"
+    :orientation  "h"
+    :space-evenly false
+    :spacing      10
+    (button
+      :class   "arch-icon"
+      :onclick "bash -c 'TARGET_DIR=$(readlink /proc/$(hyprctl activewindow -j | jq -r .pid)/cwd 2>/dev/null || echo $HOME); for term in alacritty kitty wezterm foot kitty gnome-terminal st xterm; do if command -v $term >/dev/null; then cd $TARGET_DIR && $term & break; fi; done'"
+      "󰣇")
+    (box
+      :class        "ws-cluster"
+      :orientation  "h"
+      :space-evenly false
+      :spacing      4
+      (for ws in workspaces
+        (ws-dot :id {ws.id} :active-id active-ws)))))
+
+(defwidget bar-center []
+  (box
+    :class        "bar-center"
+    :orientation  "h"
+    :space-evenly false
+    :spacing      6
+    (label :class "time-main" :text time)
+    (label :class "time-sec"  :text seconds)))
+
+(defwidget bar-right []
+  (box
+    :class        "bar-right"
+    :orientation  "h"
+    :halign       "end"
+    :space-evenly false
+    :spacing      10
+    (button
+      :class   {muted == "1" ? "vol-btn muted" : "vol-btn"}
+      :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle || amixer set Master toggle"
+      (box :orientation "h" :space-evenly false :spacing 3
+        (label :class "stat-icon" :text {muted == "1" ? "󰖁 " : "󰕾 "})
+        (label :class "stat-val"  :text "${volume}%")))
+    (box :class "divider" :orientation "h" "")
+    (box
+      :class        "bat-unit"
+      :orientation  "h"
+      :space-evenly false
+      :spacing      4
+      (bat-glyph)
+      (label :class "bat-val" :text "${bat-cap}%"))))
+
+
+(defwidget topbar []
+  (centerbox
+    :class       "topbar"
+    :orientation "h"
+    (bar-left)
+    (bar-center)
+    (bar-right)))
+
+(defwindow bar
+  :monitor   0
+  :geometry  (geometry
+    :x      "0px"
+    :y      "0px"
+    :width  "100%"
+    :height "36px"
+    :anchor "top center")
+  :stacking  "fg"
+  :exclusive true
+  (topbar))

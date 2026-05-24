@@ -1,0 +1,69 @@
+$bg-color: #1e1e2e; 
+$fg-color: #e5989b;
+$accent:   #f5e0dc;
+
+* {
+  all:         unset;
+  font-family: "FiraCode Nerd Font", "Courier New", monospace;
+  color:       $fg-color;
+}
+
+window {
+  background-color: transparent;
+}
+
+.topbar {
+  background-color: $bg-color;
+  border:           none;
+  border-radius:    0;
+  padding:          0 18px;
+  min-height:       36px;
+}
+
+.arch-icon {
+  font-size:  15px;
+  color:      $fg-color;
+  padding:    0 4px;
+  transition: opacity 180ms ease;
+}
+
+.arch-icon:hover {
+  opacity: 0.6;
+}
+
+.ws-dot {
+  min-width:        24px;
+  min-height:       24px;
+  font-size:        11px;
+  font-weight:      bold;
+  color:            rgba(229, 152, 155, 0.3);
+  transition:       all 180ms ease;
+}
+
+.ws-dot.active {
+  color:            $fg-color;
+  border-bottom:    2px solid $fg-color;
+}
+
+.time-main {
+  font-weight: bold;
+  color:       $fg-color;
+}
+
+.time-sec {
+  font-weight: normal;
+  color:       $accent;
+  opacity:     0.7;
+}
+
+.stat-icon, .stat-val, .bat-icon, .bat-val {
+  color:       $fg-color;
+  font-weight: bold;
+}
+
+.divider {
+  min-width:        1px;
+  min-height:       14px;
+  background-color: rgba(229, 152, 155, 0.2);
+  margin:           0 8px;
+}
