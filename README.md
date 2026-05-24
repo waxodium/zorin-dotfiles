@@ -24,6 +24,22 @@
 | **Wallpaper Manager** | [awww](https://codeberg.org/LGFae/awww) |
 
 ### Preview
+<!-- <p align="center">
+  <img width="720" height="406" src="https://github.com/user-attachments/assets/2c26a6b7-ea7e-40f6-a20a-81e93acb43a2"/>
+  <img width="720" height="406" alt="rice" src="https://github.com/user-attachments/assets/9b6fe875-4c13-4716-a79e-852a42dba86a" />
+  <img width="720" height="406" alt="mc" src="https://github.com/user-attachments/assets/39dee3f2-274c-40da-8786-e5e30eada55b" />
+  <img width="720" height="406" alt="zorin-btw" src="https://github.com/user-attachments/assets/ad988349-0481-4765-b971-a9cffddc2da2" />
+</p> -->
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/2c26a6b7-ea7e-40f6-a20a-81e93acb43a2" width="49%" height="51%" alt="Desktop Overview" />
+  <img src="https://github.com/user-attachments/assets/9b6fe875-4c13-4716-a79e-852a42dba86a" width="49%" height="51%" alt="Rice Setup" />
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/39dee3f2-274c-40da-8786-e5e30eada55b" width="49%" height="51% "alt="Menu Configuration" />
+  <img src="https://github.com/user-attachments/assets/ad988349-0481-4765-b971-a9cffddc2da2" width="49%" height="51%" alt="Zorin Environment" />
+</p>
+
 
 
 ## Used Programs
@@ -262,25 +278,21 @@ And this section, is for additional configuration of my desktop.
 
 - Disable GDM3
 > My ZorinOS GDM3 is disabled for my desktop. And I use the ttyd zorin login instead. After gdm3 is disabled and killed. I customized the ttyd login.
-
-    1.  Source Code for ttyd login
     
-    This is the code block for my specific ZorinOS ttyd login located in `~/.bash_profile`
-    ```bash 
+This is the code block for my specific ZorinOS ttyd login located in `~/.bash_profile`
+```
     if [ -f ~/.bashrc ]; then
         . ~/.bashrc
     fi
 
-
-
     if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
         exec /usr/bin/start-hyprland
     fi
-    ```
+```
 
     
-    And this is customized ttyd on `/etc/issue` file
-    ```
+And this is customized ttyd on `/etc/issue` file
+```
     ▄▄▄▄▄▄▄▄▄                         ▄▄▄▄▄    ▄▄▄▄▄▄▄ 
     ▀▀▀▀▀████             ▀▀        ▄███████▄ █████▀▀▀ 
         ▄███▀ ▄███▄ ████▄ ██  ████▄ ███   ███  ▀████▄  
@@ -288,7 +300,7 @@ And this section, is for additional configuration of my desktop.
     █████████ ▀███▀ ██    ██▄ ██ ██  ▀█████▀  ███████▀ 
                                                    
     date: \d  |  time: \t  |  terminal: \l
-    ```
+```
 
 # Keybinds
 My Zorin Desktop configuration is entirely personalized. I never intended for it to be customisable. But it's still free to make adjustments for any reason of use.
