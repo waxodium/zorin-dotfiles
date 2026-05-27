@@ -141,6 +141,11 @@ bind = SUPER SHIFT, 8, movetoworkspace, 8
 bind = SUPER SHIFT, 9, movetoworkspace, 9
 bind = SUPER SHIFT, 0, movetoworkspace, 10
 
+bind = $mainMod, left, movefocus, l
+bind = $mainMod, right, movefocus, r
+bind = $mainMod, up, movefocus, u
+bind = $mainMod, down, movefocus, d
+
 bind = SUPER, S, togglespecialworkspace, magic
 bind = SUPER SHIFT, S, movetoworkspace, special:magic
 
